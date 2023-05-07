@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandkube-urlshortener
+  namespace: sandkube
+  labels:
+    app: sandkube
+    component: urlshortener
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sandkube
+      component: urlshortener
+  template:
+    metadata:
+      labels:
+        app: sandkube
+        component: urlshortener
+    spec:
+      containers:
+        - name: service
+          image: sandkube/urlshortener:dev
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: urlshortener
+  namespace: sandkube
+  labels:
+    app: sandkube
+    component: urlshortener
+spec:
+  selector:
+    app: sandkube
+    component: urlshortener
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
