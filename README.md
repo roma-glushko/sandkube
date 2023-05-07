@@ -8,3 +8,10 @@ About the cluster:
 - deploys a few connected microservice via Tilt
 - supports WriteReadOnce volumes via local-path provisioner
 
+## Use cases
+
+WriteReadMany (WRX) volumes or an NFS server:
+
+```sh
+make nfs-server-install
+```

@@ -24,3 +24,11 @@ start: cluster-ctx ## Start the whole system
 
 image-build: ## Build the image
 	@docker build -t sample/service:dev -f Dockerfile .
+
+nfs-server-install: ## Install in-cluster NFS server
+	@helm repo add nfs-ganesha-server-and-external-provisioner https://kubernetes-sigs.github.io/nfs-ganesha-server-and-external-provisioner/
+	@helm install nfs nfs-ganesha-server-and-external-provisioner/nfs-server-provisioner --values ./charts/nfs-server-provisioner/values.yaml
+
+nfs-server-uninstall:
+	@helm uninstall nfs
+

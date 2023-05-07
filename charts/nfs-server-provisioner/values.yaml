@@ -1,0 +1,5 @@
+# https://artifacthub.io/packages/helm/kvaps/nfs-server-provisioner
+storageClass:
+  mountOptions:
+    - tcp
+    - nfsvers=4.1
