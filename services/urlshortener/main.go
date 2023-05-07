@@ -16,7 +16,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
-	router.POST("/", func(c *gin.Context) {
+	router.POST("/urlshortener/", func(c *gin.Context) {
 		var link LinkInfo
 
 		if err := c.ShouldBind(&link); err != nil {
@@ -31,13 +31,13 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"uuid": linkId})
 	})
 
-	router.DELETE("/:linkId", func(c *gin.Context) {
+	router.DELETE("/urlshortener/:linkId", func(c *gin.Context) {
 		linkId := c.Param("linkId")
 
 		delete(storage, linkId)
 	})
 
-	router.GET("/:linkId", func(c *gin.Context) {
+	router.GET("/urlshortener/:linkId", func(c *gin.Context) {
 		linkId := c.Param("linkId")
 
 		url, found := storage[linkId]

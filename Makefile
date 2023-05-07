@@ -11,6 +11,7 @@ help:
 cluster-start:  ## Start the cluster
 	@k3d cluster create $(CLUSTER) --agents $(CLUSTER_NODES) \
 		--registry-create $(CLUSTER)-registry:0.0.0.0:$(REGISTRY_PORT) \
+		-p "8080:80@loadbalancer" \
 		--kubeconfig-update-default --kubeconfig-switch-context
 
 cluster-ctx:  ## Configure the cluster context

@@ -40,3 +40,25 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: urlshortener
+  namespace: sandkube
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+  labels:
+    app: sandkube
+    component: urlshortener
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /urlshortener/
+            pathType: Prefix
+            backend:
+              service:
+                name: urlshortener
+                port:
+                  number: 8000
